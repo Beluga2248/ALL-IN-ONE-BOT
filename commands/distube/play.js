@@ -140,14 +140,14 @@ module.exports = {
         const pageSongs = queue.songs.slice(startIndex, endIndex);
 
         const embed = new EmbedBuilder()
-          .setTitle(`:1011614261560221726: Music Queue - Page ${page}/${totalPages}`)
+          .setTitle(`<a:Playing_Audio:1011614261560221726:> Music Queue - Page ${page}/${totalPages}`)
           .setColor('#00FF00')
           .setDescription(`**Total Songs:** ${queue.songs.length}\n**Total Duration:** ${queue.formattedDuration}\n\n`);
 
         pageSongs.forEach((song, index) => {
           const position = startIndex + index + 1;
           const isCurrentSong = position === 1;
-          const prefix = isCurrentSong ? ':1011614261560221726: **[NOW PLAYING]**' : `**${position}.**`;
+          const prefix = isCurrentSong ? '<a:Playing_Audio:1011614261560221726:> **[NOW PLAYING]**' : `**${position}.**`;
           
           embed.addFields({
             name: `${prefix} ${song.name}`,
@@ -173,7 +173,7 @@ module.exports = {
             row.addComponents(
               new ButtonBuilder()
                 .setCustomId(`queue_${page + 1}`)
-                .setLabel('Next :1017416591471808522:')
+                .setLabel('Next <a:right:1017416591471808522:>')
                 .setStyle(ButtonStyle.Secondary)
             );
           }
@@ -199,14 +199,14 @@ module.exports = {
             const newPageSongs = queue.songs.slice(newStartIndex, newEndIndex);
 
             const newEmbed = new EmbedBuilder()
-              .setTitle(`:1011614261560221726: Music Queue - Page ${newPage}/${totalPages}`)
+              .setTitle(`<a:Playing_Audio:1011614261560221726:> Music Queue - Page ${newPage}/${totalPages}`)
               .setColor('#00FF00')
               .setDescription(`**Total Songs:** ${queue.songs.length}\n**Total Duration:** ${queue.formattedDuration}\n\n`);
 
             newPageSongs.forEach((song, index) => {
               const position = newStartIndex + index + 1;
               const isCurrentSong = position === 1;
-              const prefix = isCurrentSong ? ':1011614261560221726: **[NOW PLAYING]**' : `**${position}.**`;
+              const prefix = isCurrentSong ? '<a:Playing_Audio:1011614261560221726:> **[NOW PLAYING]**' : `**${position}.**`;
               
               newEmbed.addFields({
                 name: `${prefix} ${song.name}`,
@@ -222,7 +222,7 @@ module.exports = {
               newRow.addComponents(
                 new ButtonBuilder()
                   .setCustomId(`queue_${newPage - 1}`)
-                  .setLabel(':1017416641493073981: Previous')
+                  .setLabel('<a:left:1017416641493073981:> Previous')
                   .setStyle(ButtonStyle.Secondary)
               );
             }
@@ -264,7 +264,7 @@ module.exports = {
       if (subcommand === 'nowplaying') {
         if (!queue || !queue.songs.length) {
           const message = await interaction.followUp({
-            embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('🚫 Nothing is currently playing.')],
+            embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> Nothing is currently playing.')],
           });
           this.autoDeleteMessage(message);
           return;
@@ -296,7 +296,7 @@ module.exports = {
     // Commands that require voice channel
     if (!channel) {
       const message = await interaction.followUp({
-        embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('🚫 You need to be in a voice channel to use music commands.')],
+        embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> You need to be in a voice channel to use music commands.')],
         ephemeral: true,
       });
       this.autoDeleteMessage(message);
@@ -314,7 +314,7 @@ module.exports = {
 
             if (!searchResult || !searchResult.videos.length) {
               const message = await interaction.followUp({
-                embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('🚫 No songs found for your query.')],
+                embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> No songs found for your query.')],
               });
               this.autoDeleteMessage(message);
               return;
@@ -369,7 +369,7 @@ module.exports = {
                     embeds: [
                       new EmbedBuilder()
                         .setColor('#FF00FF')
-                        .setDescription(`🎶 Queuing: **${selectedVideo.title}**...`),
+                        .setDescription(`<:Yes:1011614293420150805:> Queuing: **${selectedVideo.title}**...`),
                     ],
                   });
                   
@@ -399,7 +399,7 @@ module.exports = {
                     embeds: [
                       new EmbedBuilder()
                         .setColor('#00FF00')
-                        .setDescription(`:1011614293420150805: Successfully queued: **${selectedVideo.title}**`),
+                        .setDescription(`<:Yes:1011614293420150805:> Successfully queued: **${selectedVideo.title}**`),
                     ],
                   });
                   
@@ -407,14 +407,14 @@ module.exports = {
                   this.autoDeleteMessage(successMessage);
                 } else {
                   const errorMessage = await interaction.followUp({
-                    embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('🚫 The selected song could not be found.')],
+                    embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> The selected song could not be found.')],
                   });
                   this.autoDeleteMessage(errorMessage);
                 }
               } catch (error) {
                 console.error('Play Error:', error);
                 const errorMessage = await interaction.followUp({
-                  embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('🚫 An error occurred while trying to play the song.')],
+                  embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> An error occurred while trying to play the song.')],
                 });
                 this.autoDeleteMessage(errorMessage);
               }
@@ -438,7 +438,7 @@ module.exports = {
                 });
                 
                 const timeoutMessage = await interaction.followUp({
-                  embeds: [new EmbedBuilder().setColor('#FFFFFF').setDescription('⚠️ You didn\'t select any song in time.')],
+                  embeds: [new EmbedBuilder().setColor('#FFFFFF').setDescription('<a:wrong:1017416697168269372:> You didn\'t select any song in time.')],
                 });
                 
                 // Auto-delete both messages after timeout
@@ -452,7 +452,7 @@ module.exports = {
               embeds: [
                 new EmbedBuilder()
                   .setColor('#FF00FF')
-                  .setDescription(`:1011614293420150805: Loading song from URL...`),
+                  .setDescription(`<:Yes:1011614293420150805:> Loading song from URL...`),
               ],
             });
 
@@ -467,14 +467,14 @@ module.exports = {
                 embeds: [
                   new EmbedBuilder()
                     .setColor('#00FF00')
-                    .setDescription(`:1011614293420150805: Successfully loaded song from URL!`),
+                    .setDescription(`<:Yes:1011614293420150805:> Successfully loaded song from URL!`),
                 ],
               });
               this.autoDeleteMessage(successMessage);
             } catch (error) {
               console.error('URL Play Error:', error);
               const errorMessage = await queueMessage.edit({
-                embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('🚫 Failed to load song from URL. Please check if the URL is valid.')],
+                embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> Failed to load song from URL. Please check if the URL is valid.')],
               });
               this.autoDeleteMessage(errorMessage);
             }
@@ -484,7 +484,7 @@ module.exports = {
         case 'pause':
           if (!queue) {
             const message = await interaction.followUp({
-              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('🚫 Nothing is currently playing.')],
+              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> Nothing is currently playing.')],
             });
             this.autoDeleteMessage(message);
             return;
@@ -506,7 +506,7 @@ module.exports = {
         case 'resume':
           if (!queue) {
             const message = await interaction.followUp({
-              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('🚫 Nothing is currently playing.')],
+              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> Nothing is currently playing.')],
             });
             this.autoDeleteMessage(message);
             return;
@@ -528,14 +528,14 @@ module.exports = {
         case 'skip':
           if (!queue || queue.songs.length === 0) {
             const message = await interaction.followUp({
-              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('🚫 Nothing is currently playing.')],
+              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> Nothing is currently playing.')],
             });
             this.autoDeleteMessage(message);
             return;
           }
           if (queue.songs.length === 1) {
             const message = await interaction.followUp({
-              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('🚫 No more songs in the queue to skip to.')],
+              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> No more songs in the queue to skip to.')],
             });
             this.autoDeleteMessage(message);
             return;
@@ -551,7 +551,7 @@ module.exports = {
         case 'stop':
           if (!queue) {
             const message = await interaction.followUp({
-              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('🚫 Nothing is currently playing.')],
+              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> Nothing is currently playing.')],
             });
             this.autoDeleteMessage(message);
             return;
@@ -566,7 +566,7 @@ module.exports = {
         case 'loop':
           if (!queue) {
             const message = await interaction.followUp({
-              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('🚫 Nothing is currently playing.')],
+              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> Nothing is currently playing.')],
             });
             this.autoDeleteMessage(message);
             return;
@@ -613,7 +613,7 @@ module.exports = {
         case 'remove':
           if (!queue || queue.songs.length <= 1) {
             const message = await interaction.followUp({
-              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription(':1017416697168269372: No songs in queue to remove.')],
+              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> No songs in queue to remove.')],
             });
             this.autoDeleteMessage(message);
             return;
@@ -621,14 +621,14 @@ module.exports = {
           const position = interaction.options.getInteger('position');
           if (position === 1) {
             const message = await interaction.followUp({
-              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription(':1017416697168269372: Cannot remove the currently playing song. Use skip instead.')],
+              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> Cannot remove the currently playing song. Use skip instead.')],
             });
             this.autoDeleteMessage(message);
             return;
           }
           if (position > queue.songs.length) {
             const message = await interaction.followUp({
-              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription(`:1017416697168269372: Position ${position} doesn't exist in queue.`)],
+              embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription(`<a:wrong:1017416697168269372:> Position ${position} doesn't exist in queue.`)],
             });
             this.autoDeleteMessage(message);
             return;
@@ -643,7 +643,7 @@ module.exports = {
 
         default:
           const message = await interaction.followUp({
-            embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription(':1017416697168269372: Unknown command.')],
+            embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> Unknown command.')],
           });
           this.autoDeleteMessage(message);
           break;
@@ -651,7 +651,7 @@ module.exports = {
     } catch (error) {
       console.error('Error:', error);
       const errorMessage = await interaction.followUp({
-        embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription(':1017416697168269372: An error occurred while processing your request.')],
+        embeds: [new EmbedBuilder().setColor('#FFFF00').setDescription('<a:wrong:1017416697168269372:> An error occurred while processing your request.')],
       });
       this.autoDeleteMessage(errorMessage);
     }
